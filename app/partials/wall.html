@@ -1,0 +1,41 @@
+<div class="hero-unit">
+    <h1>Tweet Wall</h1>
+    <p>With AngularJS</p>
+</div>
+
+<div>
+    <div class="well">
+        <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
+               ng-model="search" autofocus="">
+        <a class="btn" ng-click="startWall();">Search</a>
+        <div>
+            <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh{{counter | refreshing}}</a>
+            <a ng-click="startRefresh()" ng-hide="started">Activate refresh</a>
+        </div>
+        <div>
+            <b>Searching for: </b> {{searchTerm}}
+        </div>
+    </div>
+</div>
+
+<div class="well">
+    <input type="text" placeholder="Filter tweets" class="input-large search-query ng-valid ng-dirty"
+           ng-model="query" autofocus="">
+</div>
+
+<ul class="unstyled">
+    <div class="tweet_anim animate" ng-repeat="tweet in tweets | filter:query">
+    <li class="row">
+        <div class="span1 thumbnail">
+            <img ng-src="{{tweet.profile_image_url}}"/>
+        </div>
+        <div class="span6">
+            <div>
+                <b ng-bind="tweet.from_user_name"></b>
+                {{tweet.id}}
+            </div>
+            <div ng-bind="tweet.text"></div>
+        </div>
+    </li>
+    </div>
+</ul>
