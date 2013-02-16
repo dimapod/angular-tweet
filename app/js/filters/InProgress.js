@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.filter('refreshing', function() {
+twitterClientApp.filter('inProgress', function() {
   var DOTS = {
     0: '',
     1: '.',
