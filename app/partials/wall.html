@@ -3,6 +3,7 @@
         <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
                ng-model="search" autofocus="">
         <a class="btn" ng-click="startWall();">Search</a>
+
         <div>
             <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh{{counter | inProgress}}</a>
             <a ng-click="startRefresh()" ng-hide="started">Activate refresh</a>
@@ -14,34 +15,28 @@
 </div>
 
 
-<!--<div class="row-fluid">-->
+<div class="row-fluid">
 
 
-    <div class="fm-panel">
+    <div class="span9 fm-panel">
 
         <h4>Tweet Wall</h4>
 
-        <div>
-            <ul class="unstyled">
-                <div class="animate" ng-repeat="tweet in tweets">
-                    <li class="row">
-                        <div class="span1">
-                            <img class="img-rounded" ng-src="{{tweet.profile_image_url}}"/>
-                        </div>
-                        <div class="span8">
-                            <div>
-                                <b ng-bind="tweet.from_user_name"></b>
-                                {{tweet.id}}
-                            </div>
-                            <div ng-bind="tweet.text"></div>
-                        </div>
-                    </li>
+        <div class="animate" ng-repeat="tweet in tweets">
+            <div class="span1">
+                <img class="img-rounded" ng-src="{{tweet.profile_image_url}}"/>
+            </div>
+            <div class="span8">
+                <div>
+                    <b ng-bind="tweet.from_user_name"></b>
+                    <i>{{tweet.id}}</i>
                 </div>
-            </ul>
+                <div ng-bind="tweet.text"></div>
+            </div>
         </div>
     </div>
-    <!--<div class="span3 fm-panel">-->
-        <!--<h4>Search criteria</h4>-->
-    <!--</div>-->
+    <div class="span3 fm-panel">
+        <h4>Search criteria</h4>
+    </div>
 
-<!--</div>-->
+</div>
