@@ -11,10 +11,6 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource'])
                 templateUrl: 'partials/wall.html',
                 controller: 'WallCtrl'
             })
-            .when('/quick-search', {
-                templateUrl: 'partials/quick-search.html',
-                controller: 'WallCtrl'
-            })
             .otherwise({
                 redirectTo: '/'
             });
