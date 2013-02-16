@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.controller('TwitterCtrl', function ($scope, twitterService, $timeout, wallService) {
+twitterClientApp.controller('WallCtrl', function ($scope, twitterService, $timeout, wallService) {
 
     $scope.searchTerm = ":DDDD"
     $scope.started = true;
