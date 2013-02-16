@@ -1,8 +1,3 @@
-<div class="hero-unit">
-    <h1>Tweet Wall</h1>
-    <p>With AngularJS</p>
-</div>
-
 <div>
     <div class="well">
         <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
@@ -18,13 +13,8 @@
     </div>
 </div>
 
-<div class="well">
-    <input type="text" placeholder="Filter tweets" class="input-large search-query ng-valid ng-dirty"
-           ng-model="query" autofocus="">
-</div>
-
 <ul class="unstyled">
-    <div class="tweet_anim animate" ng-repeat="tweet in tweets | filter:query">
+    <div class="tweet_anim animate" ng-repeat="tweet in tweets">
     <li class="row">
         <div class="span1 thumbnail">
             <img ng-src="{{tweet.profile_image_url}}"/>
