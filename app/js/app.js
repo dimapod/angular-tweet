@@ -11,6 +11,9 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource'])
                 templateUrl: 'partials/wall.html',
                 controller: 'WallCtrl'
             })
+            .when('/help', {
+                templateUrl: 'partials/help.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });
