@@ -6,10 +6,11 @@
         <ul>
             <li ng-repeat="param in params">
                 <span>{{param.value}}</span>
+                <a ng-click="removeHashTag($index)">[X]</a>
             </li>
         </ul>
 
-        <button class="btn btn-primary" ng-click="addTweetInfo()">Add/Remove search</button>
+        <button class="btn btn-primary" ng-click="toggleTweetInfo()">Add/Remove search</button>
 
         <form ng-show="displayForm" ng-submit="addHashTag()" name="myForm">
             <fieldset>
@@ -21,7 +22,5 @@
                 </div>
             </fieldset>
         </form>
-
-        <p>{{text}}</p>
     </div>
 </div>
