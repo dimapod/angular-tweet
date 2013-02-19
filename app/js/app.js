@@ -1,6 +1,6 @@
 'use strict';
 
-var twitterClientApp = angular.module('twitterClientApp', ['ngResource'])
+var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSanitize'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
             .when('/', {

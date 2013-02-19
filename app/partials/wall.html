@@ -31,7 +31,7 @@
                     <b ng-bind="tweet.from_user_name"></b>
                     <i>{{tweet.id}}</i>
                 </div>
-                <div ng-bind="tweet.text"></div>
+                <div ng-bind-html="tweet.text | linky"></div>
             </div>
         </div>
     </div>
