@@ -22,11 +22,11 @@
 
         <h4>Tweet Wall</h4>
 
-        <div class="animate" ng-repeat="tweet in tweets">
+        <div class="raw animate" ng-repeat="tweet in tweets">
             <div class="span1">
                 <img class="img-rounded" ng-src="{{tweet.profile_image_url}}"/>
             </div>
-            <div class="span8">
+            <div class="span11">
                 <div>
                     <b ng-bind="tweet.from_user_name"></b>
                     <i>{{tweet.id}}</i>
