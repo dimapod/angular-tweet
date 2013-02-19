@@ -1,8 +1,10 @@
 <div>
     <div class="well">
-        <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
-               ng-model="search" autofocus="">
-        <a class="btn" ng-click="startWall();">Search</a>
+        <form name="wallForm" ng-submit="startWall()">
+            <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
+                   ng-model="search" autofocus="" required>
+            <button type="submit" class="btn" ng-disabled="wallForm.$invalid">Search</button>
+        </form>
 
         <div>
             <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh{{counter | inProgress}}</a>
