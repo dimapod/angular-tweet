@@ -2,7 +2,25 @@
     <h4>Twitter Wall Configuration</h4>
 
     <div>
-        <h4>Todo</h4>
+
+        <ul>
+            <li ng-repeat="param in params">
+                <span>{{param.value}}</span>
+            </li>
+        </ul>
+
+        <button class="btn btn-primary" ng-click="addTweetInfo()">Add/Remove search</button>
+
+        <form ng-show="displayForm" ng-submit="addHashTag()" name="myForm">
+            <fieldset>
+                <legend>Search</legend>
+                <div class="input-prepend">
+                    <span class="add-on">#</span>
+                    <input class="span2" id="prependedInput" ng-model="hashTag" type="text" required>
+                    <button class="btn" type="submit" ng-disabled="myForm.$invalid">add HashTag</button>
+                </div>
+            </fieldset>
+        </form>
 
         <p>{{text}}</p>
     </div>
