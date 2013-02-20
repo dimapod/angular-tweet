@@ -2,7 +2,7 @@
 
 twitterClientApp.controller('WallCtrl', function ($scope, twitterService, $timeout, wallService) {
 
-    $scope.searchTerm = ":DDDD"
+    $scope.searchTerm = "angular"
     $scope.started = true;
     $scope.tweets = [];
     $scope.lastTweetId = undefined;
