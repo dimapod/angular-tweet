@@ -9,12 +9,11 @@ twitterClientApp.controller('ConfigurationCtrl',
             $scope.params = [];
         }
 
-        $scope.text = "Placeholder";
         $scope.displayForm = false;
 
         $scope.hashTag = "";
 
-        $scope.addTweetInfo = function() {
+        $scope.toggleTweetInfo = function() {
             $scope.displayForm = !$scope.displayForm;
         }
 
@@ -25,4 +24,10 @@ twitterClientApp.controller('ConfigurationCtrl',
             $scope.hashTag = "";
             localStorage['form'] = JSON.stringify($scope.params);
         }
+
+        $scope.removeHashTag = function(index){
+            $scope.params.splice(index, 1);
+            localStorage['form'] = JSON.stringify($scope.params);
+        }
+
     });
