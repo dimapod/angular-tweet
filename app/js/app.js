@@ -3,7 +3,7 @@
 var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSanitize'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .when('/', {
+            .when('/configuration', {
                 templateUrl: 'partials/configuration.html',
                 controller: 'ConfigurationCtrl'
             })
@@ -17,4 +17,13 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSani
             .otherwise({
                 redirectTo: '/'
             });
-    }]);
+    }]).
+    run(function($rootScope, configuration, $location) {
+        $rootScope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
+            if ((configuration.params == undefined || configuration.params.length == 0) && newValue == '/wall'){
+                $location.url('/configuration');
+            } else {
+                $location.url(newValue);
+            }
+        });
+    });
