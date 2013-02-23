@@ -1,25 +1,7 @@
-<div>
-    <div class="well">
-        <form name="wallForm" ng-submit="startWall()">
-            <input type="text" placeholder="tweet search" class="input-large search-query ng-valid ng-dirty"
-                   ng-model="search" autofocus="" required>
-            <button type="submit" class="btn" ng-disabled="wallForm.$invalid">Search</button>
-        </form>
-
-        <div>
-            <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh{{counter | inProgress}}</a>
-            <a ng-click="startRefresh()" ng-hide="started">Activate refresh</a>
-        </div>
-        <div>
-            <b>Searching for: </b> {{searchTerm}}
-        </div>
-    </div>
-</div>
-
 <div class="row-fluid">
     <div class="span9 fm-panel">
 
-        <h4>Tweet Wall</h4>
+        <h4>Tweet Wall{{counter | inProgress}}</h4>
 
         <div class="raw animate tweet" ng-repeat="tweet in tweets">
             <div class="span1">
@@ -34,8 +16,25 @@
             </div>
         </div>
     </div>
+
+    <!-- TODO -->
     <div class="span3 fm-panel">
         <h4>Search criteria</h4>
+
+        <form name="wallForm" ng-submit="startWall()">
+            <input type="text" placeholder="tweet search" class="input-medium search-query ng-valid ng-dirty"
+                   ng-model="search" autofocus="" required>
+            <button type="submit" class="btn" ng-disabled="wallForm.$invalid">Search</button>
+        </form>
+
+        <ul>
+            <li>{{searchTerm}}</li>
+        </ul>
+
+        <div>
+            <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh</a>
+            <a ng-click="startRefresh()" ng-hide="started">Activate refresh</a>
+        </div>
     </div>
 
 </div>
