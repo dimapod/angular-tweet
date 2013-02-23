@@ -35,6 +35,10 @@
  * Wall css                             *
  ****************************************/
 
+.tweet {
+    border-bottom: 1px solid #e8e8e8;
+}
+
 .animate {
     transition: all ease 0.5s;
     -moz-transition: all ease 0.5s;
@@ -42,15 +46,15 @@
     -o-transition: all ease 0.5s;
     overflow: hidden;
     max-height: 0;
-    margin: 0 4px;
-    padding: 0px 4px;
+    margin: 0px;
+    padding: 0px 40px;
 }
 
 .show {
     padding-left: 4px;
     max-height: 100px;
     margin: 4px;
-    padding: 0px 4px;
+    padding: 8px 4px;
 }
 
 .hashtag {
