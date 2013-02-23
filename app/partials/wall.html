@@ -28,11 +28,10 @@
             </div>
             <div class="span11">
                 <div>
-                    <b ng-bind="tweet.from_user_name"></b>
-                    <i>{{tweet.id}}</i>
+                    <span class="from_user_name">{{tweet.from_user_name}}</span>
+                    <span class="from_user">@{{tweet.from_user}}</span>
                 </div>
                 <div ng-bind-html="tweet.text | linky | username | hashtag"></div>
-                <div ng-bind="tweet.text"></div>
             </div>
         </div>
     </div>

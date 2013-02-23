@@ -27,7 +27,6 @@
     padding: 10px 10px 10px 10px;
 }
 
-
 .fm-right {
     text-align: right;
 }
@@ -56,4 +55,13 @@
 
 .hashtag {
     color: #0000cd;
+}
+
+.from_user_name {
+    font-weight: bold;
+}
+
+.from_user {
+    color: #777777;
+    font-style: italic;
 }
