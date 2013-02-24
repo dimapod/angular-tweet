@@ -15,15 +15,13 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSani
                 templateUrl: 'partials/help.html'
             })
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/configuration'
             });
     }]).
     run(function($rootScope, configuration, $location) {
-        $rootScope.$watch(function() { return $location.path(); }, function(newValue, oldValue){
+        $rootScope.$watch(function() { return $location.path(); }, function(newValue, oldValue) {
             if ((configuration.params == undefined || configuration.params.length == 0) && newValue == '/wall'){
                 $location.url('/configuration');
-            } else {
-                $location.url(newValue);
             }
         });
     });
