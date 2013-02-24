@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.factory('twitterService', function ($resource) {
+twitterClientApp.factory('twitterResource', function ($resource) {
 
     return $resource('http://search.twitter.com/search.json',
         {

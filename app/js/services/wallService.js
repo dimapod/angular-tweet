@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.factory('wallService', function (twitterService, $rootScope, $timeout) {
+twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $timeout) {
     var self = this;
     var timer;
     var lastTweetId = undefined;
@@ -14,16 +14,16 @@ twitterClientApp.factory('wallService', function (twitterService, $rootScope, $t
         searchTerm = _searchTerm;
         lastTweetId = undefined;
         self.info.tweets.splice(0);
-        self.refresh();
+        self.fetch();
     }
 
-    self.refresh = function () {
+    self.fetch = function () {
         if (!searchTerm) {
             self.info.tweets.splice(0);
             return;
         }
 
-        twitterService.query(
+        twitterResource.query(
             {q: searchTerm, since_id: lastTweetId},
             function (tweets) {
                 if (tweets.results && tweets.results.length) {
@@ -58,7 +58,7 @@ twitterClientApp.factory('wallService', function (twitterService, $rootScope, $t
 
     function onTimeout() {
         self.info.counter++;
-        self.refresh();
+        self.fetch();
         timer = $timeout(onTimeout, config.frequency);
     }
 

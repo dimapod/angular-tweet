@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.controller('WallCtrl', function ($scope, twitterService, wallService) {
+twitterClientApp.controller('WallCtrl', function ($scope, twitterResource, wallService) {
     $scope.searchForm = "";
     $scope.searchTerm = "angularjs";
 
