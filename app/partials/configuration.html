@@ -4,7 +4,7 @@
     <div>
 
         <ul>
-            <li ng-repeat="param in params">
+            <li ng-repeat="param in params" fadey="200">
                 <span>{{param.value}}</span>
                 <a ng-click="removeHashTag($index)">[X]</a>
             </li>
@@ -17,7 +17,7 @@
                 <legend>Search</legend>
                 <div class="input-prepend">
                     <span class="add-on">#</span>
-                    <input class="span2" id="prependedInput" ng-model="hashTag" type="text" required>
+                    <input autofocus class="span2" id="prependedInput" ng-model="hashTag" type="text" required>
                     <button class="btn" type="submit" ng-disabled="myForm.$invalid">add HashTag</button>
                 </div>
             </fieldset>
