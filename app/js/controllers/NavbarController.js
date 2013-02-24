@@ -1,6 +1,6 @@
 'use strict';
 
-twitterClientApp.controller('NavbarController',
+twitterClientApp.controller('NavbarCtrl',
     function NavbarController($scope, $location, configuration) {
 
         $scope.$watch(function () {
