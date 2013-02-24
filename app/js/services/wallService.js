@@ -27,13 +27,13 @@ twitterClientApp.factory('wallService', function (twitterService, $rootScope, $t
             {q: searchTerm, since_id: lastTweetId},
             function (tweets) {
                 if (tweets.results && tweets.results.length) {
-                    putNewElements(tweets.results);
+                    self.putNewElements(tweets.results);
                     lastTweetId = self.info.tweets[0].id;
                 }
             });
     };
 
-    function putNewElements(newTweets) {
+    self.putNewElements = function (newTweets) {
         angular.forEach(newTweets.slice(0).reverse(), function (newTweet) {
             if (newTweet.id != lastTweetId) {
                 self.info.tweets.unshift(newTweet);
