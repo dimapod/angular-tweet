@@ -17,11 +17,4 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSani
             .otherwise({
                 redirectTo: '/configuration'
             });
-    }]).
-    run(function($rootScope, configuration, $location) {
-        $rootScope.$watch(function() { return $location.path(); }, function(newValue, oldValue) {
-            if ((configuration.params == undefined || configuration.params.length == 0) && newValue == '/wall'){
-                $location.url('/configuration');
-            }
-        });
-    });
+    }]);

@@ -13,4 +13,11 @@ twitterClientApp.controller('NavbarCtrl',
             return $location.path() === routeName;
         };
 
+
+        $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue) {
+            if ((configuration.params == undefined || configuration.params.length == 0) && newValue == '/wall'){
+                $location.url('/configuration');
+            }
+        });
+
     });
