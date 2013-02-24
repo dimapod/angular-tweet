@@ -1,8 +1,6 @@
 'use strict';
 
 describe('Highlight filters', function () {
-    beforeEach(module('twitterClientApp'));
-
     describe('Username filter', function () {
 
         it('should have a username filter', inject(function ($filter) {
