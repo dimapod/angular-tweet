@@ -1,7 +1,7 @@
 <div class="row-fluid">
     <div class="span9 fm-panel">
 
-        <h4>Tweet Wall{{counter | inProgress}}</h4>
+        <h4>Tweet Wall{{wall.counter | inProgress}}</h4>
 
         <div class="raw animate tweet" ng-repeat="tweet in tweets">
             <div class="span1">
@@ -32,8 +32,8 @@
         </ul>
 
         <div>
-            <a ng-click="stopRefresh()" ng-hide="!started">Stop refresh</a>
-            <a ng-click="startRefresh()" ng-hide="started">Activate refresh</a>
+            <a ng-click="stopRefresh()" ng-hide="!wall.started">Stop refresh</a>
+            <a ng-click="startRefresh()" ng-hide="wall.started">Activate refresh</a>
         </div>
     </div>
 

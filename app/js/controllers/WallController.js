@@ -1,27 +1,25 @@
 'use strict';
 
-twitterClientApp.controller('WallCtrl', function ($scope, twitterService, $timeout, wallService) {
+twitterClientApp.controller('WallCtrl', function ($scope, twitterService, wallService) {
 
     $scope.searchTerm = "angularjs"
-    $scope.started = true;
     $scope.tweets = [];
-    $scope.lastTweetId = undefined;
-    $scope.counter = 0;
-    $scope.config = {tweets_length: 15, frequency: 1000};
 
     wallService.init($scope);
-    wallService.refresh();
+    wallService.start();
+
+    $scope.wall = wallService.info;
 
     $scope.startRefresh = function () {
-        wallService.startRefresh();
+        wallService.start();
     };
 
     $scope.stopRefresh = function () {
-        wallService.stopRefresh();
+        wallService.stop();
     };
 
     $scope.startWall = function () {
-        $scope.lastTweetId = undefined;
+        //$scope.lastTweetId = undefined;
         $scope.tweets.splice(0);
         $scope.searchTerm = $scope.search;
         wallService.refresh();
