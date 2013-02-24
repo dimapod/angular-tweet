@@ -1,6 +1,7 @@
 'use strict';
 
 describe('In-progress filter', function () {
+    beforeEach(module('twitterClientApp'));
 
     it('should have a in-progress filter', inject(function($filter) {
         expect($filter('inProgress')).toBeDefined();

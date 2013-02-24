@@ -1,6 +1,7 @@
 'use strict';
 
 describe('Highlight filters', function () {
+    beforeEach(module('twitterClientApp'));
 
     describe('Username filter', function () {
 

@@ -1,28 +1,16 @@
 'use strict';
 
 twitterClientApp.controller('WallCtrl', function ($scope, twitterService, wallService) {
+    $scope.searchForm = "";
+    $scope.searchTerm = "angularjs";
 
-    $scope.searchTerm = "angularjs"
-    $scope.tweets = [];
-
-    wallService.init($scope);
+    wallService.search($scope.searchTerm);
     wallService.start();
 
-    $scope.wall = wallService.info;
-
-    $scope.startRefresh = function () {
-        wallService.start();
-    };
-
-    $scope.stopRefresh = function () {
-        wallService.stop();
-    };
+    $scope.wall = wallService;
 
     $scope.startWall = function () {
-        //$scope.lastTweetId = undefined;
-        $scope.tweets.splice(0);
-        $scope.searchTerm = $scope.search;
-        wallService.refresh();
+        $scope.searchTerm = $scope.searchForm;
+        wallService.search($scope.searchTerm);
     };
-
 });

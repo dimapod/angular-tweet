@@ -2,32 +2,33 @@
 
 twitterClientApp.factory('wallService', function (twitterService, $rootScope, $timeout) {
     var self = this;
-    var scope = undefined;
     var timer;
     var lastTweetId = undefined;
+    var searchTerm = undefined;
+
     var config = {tweets_length: 15, frequency: 1000};
 
-    //self.started = false;
-    self.info = {counter: 0, started: false};
+    self.info = {counter: 0, started: false, tweets: []};
 
-    self.init = function (_scope) {
-        scope = _scope;
+    self.search = function (_searchTerm) {
+        searchTerm = _searchTerm;
         lastTweetId = undefined;
+        self.info.tweets.splice(0);
         self.refresh();
     }
 
     self.refresh = function () {
-        if (!scope.searchTerm) {
-            scope.tweets.splice(0);
+        if (!searchTerm) {
+            self.info.tweets.splice(0);
             return;
         }
 
-        var params = {q: scope.searchTerm, since_id: lastTweetId};
-        twitterService.query(params,
+        twitterService.query(
+            {q: searchTerm, since_id: lastTweetId},
             function (tweets) {
                 if (tweets.results && tweets.results.length) {
                     putNewElements(tweets.results);
-                    lastTweetId = scope.tweets[0].id;
+                    lastTweetId = self.info.tweets[0].id;
                 }
             });
     };
@@ -35,13 +36,11 @@ twitterClientApp.factory('wallService', function (twitterService, $rootScope, $t
     function putNewElements(newTweets) {
         angular.forEach(newTweets.slice(0).reverse(), function (newTweet) {
             if (newTweet.id != lastTweetId) {
-                scope.tweets.unshift(newTweet);
+                self.info.tweets.unshift(newTweet);
             }
         });
-        scope.tweets.splice(config.tweets_length);
+        self.info.tweets.splice(config.tweets_length);
     };
-
-    // Auto refresh
 
     self.startRefresh = function () {
         if (!self.info.started) {
@@ -65,7 +64,7 @@ twitterClientApp.factory('wallService', function (twitterService, $rootScope, $t
 
     // Public APIs
     return {
-        init: self.init,
+        search: self.search,
         start: self.startRefresh,
         stop: self.stopRefresh,
         info: self.info
