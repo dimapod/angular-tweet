@@ -1,9 +1,9 @@
 'use strict';
 
 twitterClientApp.controller('ConfigurationCtrl',
-    function ConfigurationCtrl($scope, configTweet) {
+    function ConfigurationCtrl($scope, configuration) {
 
-        $scope.params = configTweet.loadTweetConfig();
+        $scope.params = configuration.params;
 
         $scope.displayForm = false;
 
@@ -18,12 +18,12 @@ twitterClientApp.controller('ConfigurationCtrl',
                 type: 'hash',
                 value:$scope.hashTag});
             $scope.hashTag = "";
-            configTweet.saveTweetConfig($scope.params);
+            //configTweet.saveTweetConfig($scope.params);
         };
 
         $scope.removeHashTag = function(index){
             $scope.params.splice(index, 1);
-            configTweet.saveTweetConfig($scope.params);
+            //configTweet.saveTweetConfig($scope.params);
         };
 
     });
