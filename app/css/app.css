@@ -52,7 +52,7 @@
 
 .show {
     padding-left: 4px;
-    max-height: 100px;
+    max-height: 200px;
     margin: 4px;
     padding: 8px 4px;
 }
@@ -61,11 +61,11 @@
     color: #0000cd;
 }
 
-.from_user_name {
+.tweet .from_user_name {
     font-weight: bold;
 }
 
-.from_user {
+.tweet .from_user {
     color: #777777;
     font-style: italic;
 }
@@ -77,4 +77,9 @@
     font-family: 'Montserrat', sans-serif;
     color : #969BA0;
     font-size:0.9em;
+}
+
+.media {
+    max-height: 100px;
+    max-width: 100px;
 }

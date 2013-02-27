@@ -24,7 +24,7 @@ twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $
         }
 
         twitterResource.query(
-            {q: scope.searchTerm, since_id: scope.lastTweetId},
+            {q: scope.searchTerm, since_id: scope.lastTweetId, include_entities: true},
             function (tweets) {
                 if (tweets.results && tweets.results.length) {
                     self.putNewElements(tweets.results);
