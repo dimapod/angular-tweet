@@ -10,6 +10,7 @@
             <div class="span11">
                 <div>
                     <span class="from_user_name">{{tweet.from_user_name}}</span>
+                    <span class="date">{{tweet.date | date:'dd/MM/yyyy - hh:mm'}}</span>
                     <span class="from_user">@{{tweet.from_user}}</span>
                 </div>
                 <div ng-bind-html="tweet.text | linky | username | hashtag"></div>

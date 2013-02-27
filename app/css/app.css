@@ -69,3 +69,12 @@
     color: #777777;
     font-style: italic;
 }
+
+.date {
+    float: right;
+    margin-right: 20px;
+    padding-top:4px;
+    font-family: 'Montserrat', sans-serif;
+    color : #969BA0;
+    font-size:0.9em;
+}

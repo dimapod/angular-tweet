@@ -15,6 +15,6 @@ var twitterClientApp = angular.module('twitterClientApp', ['ngResource', 'ngSani
                 templateUrl: 'partials/help.html'
             })
             .otherwise({
-                redirectTo: '/configuration'
+                redirectTo: '/wall'
             });
     }]);

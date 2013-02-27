@@ -3,63 +3,64 @@
 twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $timeout) {
     var self = this;
     var timer;
-    var lastTweetId = undefined;
-    var searchTerm = undefined;
 
-    var config = {tweets_length: 15, frequency: 1000};
-
-    self.info = {counter: 0, started: false, tweets: []};
+    var scope = $rootScope.$new();
+    scope.lastTweetId = undefined;
+    scope.config = {tweets_length: 15, frequency: 1000};
+    scope.data = {counter: 0, started: false, tweets: [] };
 
     self.search = function (_searchTerm) {
-        searchTerm = _searchTerm;
-        lastTweetId = undefined;
-        self.info.tweets.splice(0);
+        scope.searchTerm = _searchTerm;
+        scope.lastTweetId = undefined;
+        scope.data.tweets.splice(0);
+
         self.fetch();
     }
 
     self.fetch = function () {
-        if (!searchTerm) {
-            self.info.tweets.splice(0);
+        if (!scope.searchTerm) {
+            scope.data.tweets.splice(0);
             return;
         }
 
         twitterResource.query(
-            {q: searchTerm, since_id: lastTweetId},
+            {q: scope.searchTerm, since_id: scope.lastTweetId},
             function (tweets) {
                 if (tweets.results && tweets.results.length) {
                     self.putNewElements(tweets.results);
-                    lastTweetId = self.info.tweets[0].id;
+                    scope.lastTweetId = tweets.max_id;
                 }
             });
     };
 
     self.putNewElements = function (newTweets) {
         angular.forEach(newTweets.slice(0).reverse(), function (newTweet) {
-            if (newTweet.id != lastTweetId) {
-                self.info.tweets.unshift(newTweet);
+            if (newTweet.id != scope.lastTweetId) {
+                newTweet.date = Date.parse(newTweet.created_at);
+                scope.data.tweets.unshift(newTweet);
             }
         });
-        self.info.tweets.splice(config.tweets_length);
+        scope.data.tweets.splice(scope.config.tweets_length);
     };
 
     self.startRefresh = function () {
-        if (!self.info.started) {
-            timer = $timeout(onTimeout, config.frequency);
-            self.info.started = true;
+        if (!scope.data.started) {
+            timer = $timeout(onTimeout, scope.config.frequency);
+            scope.data.started = true;
         }
     };
 
     self.stopRefresh = function () {
-        if (self.info.started) {
+        if (scope.data.started) {
             $timeout.cancel(timer);
-            self.info.started = false;
+            scope.data.started = false;
         }
     };
 
     function onTimeout() {
-        self.info.counter++;
+        scope.data.counter++;
         self.fetch();
-        timer = $timeout(onTimeout, config.frequency);
+        timer = $timeout(onTimeout, scope.config.frequency);
     }
 
     // Public APIs
@@ -67,6 +68,6 @@ twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $
         search: self.search,
         start: self.startRefresh,
         stop: self.stopRefresh,
-        info: self.info
+        info: scope.data
     };
 });
