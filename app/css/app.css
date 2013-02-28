@@ -35,10 +35,6 @@
  * Wall css                             *
  ****************************************/
 
-.tweet {
-    border-bottom: 1px solid #e8e8e8;
-}
-
 .animate {
     transition: all ease 0.5s;
     -moz-transition: all ease 0.5s;
@@ -57,12 +53,20 @@
     padding: 8px 4px;
 }
 
-.hashtag {
+.tweet {
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 1.1em;
+}
+
+.tweet .hashtag {
     color: #0000cd;
 }
 
 .tweet .from_user_name {
     font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color : #00385c;
+    font-size: 1.3em;
 }
 
 .tweet .from_user {
@@ -70,7 +74,7 @@
     font-style: italic;
 }
 
-.date {
+.tweet .date {
     float: right;
     margin-right: 20px;
     padding-top:4px;
@@ -79,7 +83,7 @@
     font-size:0.9em;
 }
 
-.media {
+.tweet .media {
     max-height: 100px;
     max-width: 100px;
 }
