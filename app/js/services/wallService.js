@@ -1,66 +1,44 @@
 'use strict';
 
-twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $timeout) {
+twitterClientApp.factory('wallService', function (twitterService, $rootScope, $timeout) {
     var self = this;
     var timer;
 
-    var scope = $rootScope.$new();
-    scope.lastTweetId = undefined;
-    scope.config = {tweets_length: 15, frequency: 1000};
-    scope.data = {counter: 0, started: false, tweets: [] };
+    // TODO: inject from configuration
+    var config = {tweets_length: 15, frequency: 1000};
 
-    self.search = function (_searchTerm) {
-        scope.searchTerm = _searchTerm;
-        scope.lastTweetId = undefined;
-        scope.data.tweets.splice(0);
+    var scope = {};
+    scope.max_id_str = undefined;
+    scope.counter = 0;
+    scope.started = false;
+    scope.tweets = [];
 
-        self.fetch();
+    self.search = function (searchTerm) {
+        scope.searchTerm = searchTerm;
+        scope.max_id_str = undefined;
+        scope.tweets.splice(0);
+
+        twitterService.fetch(scope);
     }
 
-    self.fetch = function () {
-        if (!scope.searchTerm) {
-            scope.data.tweets.splice(0);
-            return;
-        }
-
-        twitterResource.query(
-            {q: scope.searchTerm, since_id: scope.lastTweetId, include_entities: true},
-            function (tweets) {
-                if (tweets.results && tweets.results.length) {
-                    self.putNewElements(tweets.results);
-                    scope.lastTweetId = tweets.max_id;
-                }
-            });
-    };
-
-    self.putNewElements = function (newTweets) {
-        angular.forEach(newTweets.slice(0).reverse(), function (newTweet) {
-            if (newTweet.id != scope.lastTweetId) {
-                newTweet.date = Date.parse(newTweet.created_at);
-                scope.data.tweets.unshift(newTweet);
-            }
-        });
-        scope.data.tweets.splice(scope.config.tweets_length);
-    };
-
     self.startRefresh = function () {
-        if (!scope.data.started) {
-            timer = $timeout(onTimeout, scope.config.frequency);
-            scope.data.started = true;
+        if (!scope.started) {
+            timer = $timeout(onTimeout, config.frequency);
+            scope.started = true;
         }
     };
 
     self.stopRefresh = function () {
-        if (scope.data.started) {
+        if (scope.started) {
             $timeout.cancel(timer);
-            scope.data.started = false;
+            scope.started = false;
         }
     };
 
     function onTimeout() {
-        scope.data.counter++;
-        self.fetch();
-        timer = $timeout(onTimeout, scope.config.frequency);
+        scope.counter++;
+        twitterService.fetch(scope);
+        timer = $timeout(onTimeout, config.frequency);
     }
 
     // Public APIs
@@ -68,6 +46,6 @@ twitterClientApp.factory('wallService', function (twitterResource, $rootScope, $
         search: self.search,
         start: self.startRefresh,
         stop: self.stopRefresh,
-        info: scope.data
+        info: scope
     };
 });
