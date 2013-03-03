@@ -1,9 +1,9 @@
 'use strict';
 
 twitterClientApp.controller('NavbarCtrl',
-    function NavbarController($scope, $location, configuration) {
+    function NavbarController($scope, $location, configTweet) {
 
-        $scope.confParams = configuration.params;
+        $scope.confParams = configTweet.loadTweetConfig();
 
         $scope.routeIs = function (routeName) {
             return $location.path() === routeName;
