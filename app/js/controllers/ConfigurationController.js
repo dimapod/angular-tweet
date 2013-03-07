@@ -3,7 +3,7 @@
 twitterClientApp.controller('ConfigurationCtrl',
     function ConfigurationCtrl($scope, configTweet) {
 
-        $scope.params = configTweet.loadTweetConfig();
+        $scope.params = configTweet.config.params;
 
         $scope.displayForm = false;
         $scope.hashTag = "";
@@ -13,12 +13,12 @@ twitterClientApp.controller('ConfigurationCtrl',
         };
 
         $scope.addHashTag = function () {
-            $scope.params = configTweet.saveTweetConfig($scope.hashTag);
+            configTweet.addParam($scope.hashTag);
             $scope.hashTag = "";
         };
 
         $scope.removeHashTag = function (index) {
-            $scope.params = configTweet.removeHashTag(index);
+            configTweet.removeParam(index);
         };
 
     });
