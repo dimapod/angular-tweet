@@ -1,12 +1,13 @@
 'use strict';
 
-twitterClientApp.directive('animate', function () {
+twitterClientApp.directive('animate', function ($timeout) {
     return {
-        restrict: 'C',
+        restrict: 'A',
         link: function postLink(scope, element, attrs) {
-            setTimeout(function () {
-                element.addClass('show');
-            }, 0);
+            element.addClass('animate');
+            $timeout(function () {
+                element.removeClass('animate');
+            }, 20, false);
         }
     };
 
