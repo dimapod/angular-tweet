@@ -1,12 +1,9 @@
 'use strict';
 
-twitterClientApp.factory('twitterService', function (twitterResource) {
-    var self = this;
+twitterClientApp.factory('twitterService', function (twitterResource, configTweet) {
+    var tweets_length = configTweet.config.tweets_length;
 
-    // TODO: inject from configuration
-    self.config = {tweets_length: 15, frequency: 1000};
-
-    self.fetch = function (scope) {
+    function fetch(scope) {
         if (!scope.searchTerm) {
             scope.tweets.splice(0);
             return;
@@ -20,7 +17,7 @@ twitterClientApp.factory('twitterService', function (twitterResource) {
                         tweet.date = Date.parse(tweet.created_at);
                         scope.tweets.unshift(tweet);
                     });
-                    scope.tweets.splice(self.config.tweets_length);
+                    scope.tweets.splice(tweets_length);
                     scope.max_id_str = tweets.max_id_str;
                 }
             });
@@ -28,6 +25,6 @@ twitterClientApp.factory('twitterService', function (twitterResource) {
 
     // Public APIs
     return {
-        fetch: self.fetch
+        fetch: fetch
     };
 });
