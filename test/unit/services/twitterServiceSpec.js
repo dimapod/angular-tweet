@@ -30,12 +30,13 @@ describe('twitterService.js', function(){
             max_id_str: "12"
         }
 
+        // TwitterResource Mock
         var twitterResource = {
             query: function(value, fn) {
-                console.log("twitterResourceMock.query");
                 fn(receivedTweets);
             }
         };
+        // ConfigTweet Mock
         var configTweet = { config: { tweets_length: 3 } }
 
         module(function($provide) {
@@ -48,6 +49,8 @@ describe('twitterService.js', function(){
         });
     });
 
+    // -> use iit(...) to execute only one given test
+    // -> use xit(...) to disable the given test
     it('should have twitterService defined', function() {
         expect(twitterService).toBeDefined();
     });
@@ -56,11 +59,9 @@ describe('twitterService.js', function(){
         expect(twitterService.fetch).toBeDefined();
     });
 
-    // -> use iit(...) to execute only one given test
-    // -> use xit(...) to disable the given test
     it('should remove all tweets from scope.tweets when searchTerm is undefined', function() {
-        var scope = { searchTerm: undefined, max_id_str: undefined, tweets:[{text:"tw2", id: 2},{text:"tw1", id: 1}] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[{text:"tw2", id: 2},{text:"tw1", id: 1}] }
+        twitterService.fetch(undefined, scope);
 
         // -> use the fallowing command to stop and debug unit test in chrome dev tools
         // debugger;
@@ -70,14 +71,14 @@ describe('twitterService.js', function(){
 
     it('should remove all tweets from scope.tweets when searchTerm is empty', function() {
         var scope = { searchTerm: "", max_id_str: undefined, tweets:[{text:"tw2", id: 2},{text:"tw1", id: 1}] }
-        twitterService.fetch(scope);
+        twitterService.fetch("", scope);
 
         expect(scope.tweets.length).toBe(0);
     });
 
     it('should fill empty scope.tweets with 2 new tweets', function() {
-        var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[] }
+        twitterService.fetch("angular", scope);
 
         expect(scope.tweets.length).toBe(2);
         expect(scope.tweets[0].id).toBe(12);
@@ -85,8 +86,8 @@ describe('twitterService.js', function(){
     });
 
     it('should add 2 new tweets into scope.tweets having 1 tweet', function() {
-        var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[ {text:"existing tweet", id: 1} ] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[ {text:"existing tweet", id: 1} ] }
+        twitterService.fetch("angular", scope);
 
         expect(scope.tweets.length).toBe(3);
         expect(scope.tweets[0].id).toBe(12);
@@ -95,8 +96,8 @@ describe('twitterService.js', function(){
     });
 
     it('should remove all extra tweets from scope.tweets (exceeding configTweet.config.tweets_length = 3)', function() {
-        var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[ {text:"tw3", id: 3}, {text:"tw2", id: 2}, {text:"tw1", id: 1} ] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[ {text:"tw3", id: 3}, {text:"tw2", id: 2}, {text:"tw1", id: 1} ] }
+        twitterService.fetch("angular", scope);
 
         expect(scope.tweets.length).toBe(3);
         expect(scope.tweets[0].id).toBe(12);
@@ -105,16 +106,16 @@ describe('twitterService.js', function(){
     });
 
     it('should set scope.max_id_str to last received tweet id', function() {
-        var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[ {text:"tw3", id: 3}, {text:"tw2", id: 2}, {text:"tw1", id: 1} ] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[ {text:"tw3", id: 3}, {text:"tw2", id: 2}, {text:"tw1", id: 1} ] }
+        twitterService.fetch("angular", scope);
 
         expect(scope.max_id_str).toBeDefined();
         expect(scope.max_id_str).toBe('12');
     });
 
     it('should parse received data string in JS Date', function() {
-        var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[] }
-        twitterService.fetch(scope);
+        var scope = { max_id_str: undefined, tweets:[] }
+        twitterService.fetch("angular", scope);
 
         expect(scope.tweets.length).toBe(2);
         expect(scope.tweets[0].date).toBe(1362836431000);

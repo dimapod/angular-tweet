@@ -3,6 +3,7 @@
 twitterClientApp.factory('wallService', function (twitterService, configTweet, $timeout) {
     var timer;
     var frequency = configTweet.config.frequency;
+    var searchTerm;
 
     var scope = {
         max_id_str: undefined,
@@ -12,16 +13,16 @@ twitterClientApp.factory('wallService', function (twitterService, configTweet, $
     }
 
     function search(_searchTerm) {
-        scope.searchTerm = _searchTerm;
+        searchTerm = _searchTerm;
         scope.max_id_str = undefined;
         scope.tweets.splice(0);
 
-        twitterService.fetch(scope);
+        twitterService.fetch(searchTerm, scope);
     }
 
     function startRefresh() {
         if (!scope.started) {
-            onTimeout();
+            timer = $timeout(onTimeout, frequency);
             scope.started = true;
         }
     }
@@ -33,7 +34,7 @@ twitterClientApp.factory('wallService', function (twitterService, configTweet, $
 
     function onTimeout() {
         scope.counter++;
-        twitterService.fetch(scope);
+        twitterService.fetch(searchTerm, scope);
         timer = $timeout(onTimeout, frequency);
     }
 
