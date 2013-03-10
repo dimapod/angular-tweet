@@ -1,5 +1,7 @@
 'use strict';
 
+// -> use ddescribe(...) to execute only one given test suite
+// -> use xdescribe(...) to disable given test suite
 describe('twitterService.js', function(){
     var twitterService;
 
@@ -47,15 +49,21 @@ describe('twitterService.js', function(){
     });
 
     it('should have twitterService defined', function() {
-        var scope = { searchTerm: undefined, max_id_str: undefined, tweets:[{text:"tw2", id: 2},{text:"tw1", id: 1}] }
-        twitterService.fetch(scope);
-
         expect(twitterService).toBeDefined();
     });
 
+    it('should have public function twitterService.fetch() defined', function() {
+        expect(twitterService.fetch).toBeDefined();
+    });
+
+    // -> use iit(...) to execute only one given test
+    // -> use xit(...) to disable the given test
     it('should remove all tweets from scope.tweets when searchTerm is undefined', function() {
         var scope = { searchTerm: undefined, max_id_str: undefined, tweets:[{text:"tw2", id: 2},{text:"tw1", id: 1}] }
         twitterService.fetch(scope);
+
+        // -> use the fallowing command to stop and debug unit test in chrome dev tools
+        // debugger;
 
         expect(scope.tweets.length).toBe(0);
     });
@@ -104,12 +112,13 @@ describe('twitterService.js', function(){
         expect(scope.max_id_str).toBe('12');
     });
 
-    it('should parse received data string in js Date', function() {
+    it('should parse received data string in JS Date', function() {
         var scope = { searchTerm: "angular", max_id_str: undefined, tweets:[] }
         twitterService.fetch(scope);
 
         expect(scope.tweets.length).toBe(2);
         expect(scope.tweets[0].date).toBe(1362836431000);
+        expect(scope.tweets[1].date).toBe(1362836371000);
     });
 
 });

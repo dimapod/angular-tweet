@@ -1,51 +1,47 @@
 'use strict';
 
-twitterClientApp.factory('wallService', function (twitterService, $rootScope, $timeout) {
-    var self = this;
+twitterClientApp.factory('wallService', function (twitterService, configTweet, $timeout) {
     var timer;
+    var frequency = configTweet.config.frequency;
 
-    // TODO: inject from configuration
-    var config = {tweets_length: 15, frequency: 1000};
+    var scope = {
+        max_id_str: undefined,
+        counter: 0,
+        started: false,
+        tweets: []
+    }
 
-    var scope = {};
-    scope.max_id_str = undefined;
-    scope.counter = 0;
-    scope.started = false;
-    scope.tweets = [];
-
-    self.search = function (searchTerm) {
-        scope.searchTerm = searchTerm;
+    function search(_searchTerm) {
+        scope.searchTerm = _searchTerm;
         scope.max_id_str = undefined;
         scope.tweets.splice(0);
 
         twitterService.fetch(scope);
     }
 
-    self.startRefresh = function () {
+    function startRefresh() {
         if (!scope.started) {
-            timer = $timeout(onTimeout, config.frequency);
+            onTimeout();
             scope.started = true;
         }
-    };
+    }
 
-    self.stopRefresh = function () {
-        if (scope.started) {
-            $timeout.cancel(timer);
-            scope.started = false;
-        }
-    };
+    function stopRefresh() {
+        $timeout.cancel(timer);
+        scope.started = false;
+    }
 
     function onTimeout() {
         scope.counter++;
         twitterService.fetch(scope);
-        timer = $timeout(onTimeout, config.frequency);
+        timer = $timeout(onTimeout, frequency);
     }
 
     // Public APIs
     return {
-        search: self.search,
-        start: self.startRefresh,
-        stop: self.stopRefresh,
+        search: search,
+        start: startRefresh,
+        stop: stopRefresh,
         info: scope
     };
 });
