@@ -2,7 +2,7 @@
 
 // -> use ddescribe(...) to execute only one given test suite
 // -> use xdescribe(...) to disable given test suite
-describe('twitterService.js', function(){
+describe('wallService.js', function(){
     var wallService, $timeout;
     var twitterService;
 
