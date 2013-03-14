@@ -9,10 +9,4 @@ twitterClientApp.controller('NavbarCtrl',
             return $location.path() === routeName;
         };
 
-        $scope.$watch(function() { return $location.path(); }, function(newValue, oldValue) {
-            if ($scope.confParams.length == 0 && newValue == '/wall') {
-                $location.url('/configuration');
-            }
-        });
-
     });

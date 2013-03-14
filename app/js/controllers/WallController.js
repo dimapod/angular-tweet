@@ -5,7 +5,7 @@ twitterClientApp.controller('WallCtrl', function ($scope, twitterResource, wallS
     $scope.searchTerm = "angularjs";
 
     wallService.search($scope.searchTerm);
-    wallService.start();
+    //wallService.start();
 
     $scope.wall = wallService;
 
