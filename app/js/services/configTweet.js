@@ -5,7 +5,7 @@ twitterClientApp.factory('configTweet', function ($rootScope) {
         configStr = localStorage[LOCAL_STORAGE_ID];
 
     var configInitial = {
-        frequency: 10000,
+        frequency: 1000,
         tweets_length: 15,
         params: []
     }
