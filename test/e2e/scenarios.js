@@ -79,7 +79,7 @@ describe('e2e test suite', function () {
 
                 element('#configuration a').click();
 
-                // expect active class to be set only for configuration menu item
+                // expect .active class to be set only for configuration menu item
                 expect(element('.active').count()).toBe(1);
                 expect(element('#configuration.active').count()).toBe(1);
             });
@@ -102,7 +102,7 @@ describe('e2e test suite', function () {
 
                 element('#wall a').click();
 
-                // expect active class to be set only for wall menu item
+                // expect .active class to be set only for wall menu item
                 expect(element('.active').count()).toBe(1);
                 expect(element('#wall.active').count()).toBe(1);
             });
@@ -123,7 +123,7 @@ describe('e2e test suite', function () {
 
                 element('#help a').click();
 
-                // expect active class to be set only for help menu item
+                // expect .active class to be set only for help menu item
                 expect(element('.active').count()).toBe(1);
                 expect(element('#help.active').count()).toBe(1);
             });
